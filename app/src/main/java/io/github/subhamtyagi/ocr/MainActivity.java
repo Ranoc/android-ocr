@@ -1,5 +1,7 @@
 package io.github.subhamtyagi.ocr;
 
+
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements TessBaseAPI.Progr
     private File dirBest;
     private File dirStandard;
     private File dirFast;
+    private File dirDigits;
     private File currentDirectory;
     /**
      * Our ImageTextReader Instance
@@ -271,14 +274,18 @@ public class MainActivity extends AppCompatActivity implements TessBaseAPI.Progr
         dirBest = new File(getExternalFilesDir("best").getAbsolutePath());
         dirFast = new File(getExternalFilesDir("fast").getAbsolutePath());
         dirStandard = new File(getExternalFilesDir("standard").getAbsolutePath());
+        dirDigits = new File(getExternalFilesDir("digits").getAbsolutePath());
         dirBest.mkdirs();
         dirStandard.mkdirs();
         dirFast.mkdirs();
+        dirDigits.mkdirs();
         currentDirectory = new File(dirBest, "tessdata");
         currentDirectory.mkdirs();
         currentDirectory = new File(dirStandard, "tessdata");
         currentDirectory.mkdirs();
         currentDirectory = new File(dirFast, "tessdata");
+        currentDirectory.mkdirs();
+        currentDirectory = new File(dirDigits, "tessdata");
         currentDirectory.mkdirs();
     }
 
@@ -302,6 +309,10 @@ public class MainActivity extends AppCompatActivity implements TessBaseAPI.Progr
             case "standard":
                 cf = dirStandard;
                 currentDirectory = new File(dirStandard, "tessdata");
+                break;
+            case "digits":
+                cf = dirDigits;
+                currentDirectory = new File(dirDigits, "tessdata");
                 break;
             default:
                 cf = dirFast;
@@ -388,6 +399,9 @@ public class MainActivity extends AppCompatActivity implements TessBaseAPI.Progr
                 break;
             case "standard":
                 currentDirectory = new File(dirStandard, "tessdata");
+                break;
+            case "digits":
+                currentDirectory = new File(dirDigits, "tessdata");
                 break;
             default:
                 currentDirectory = new File(dirFast, "tessdata");
